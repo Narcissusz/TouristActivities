@@ -14,12 +14,13 @@ struct ActivitiesView: View {
     var body: some View {
         NavigationView{
             VStack{
-                NavigationLink(destination: ActivityDetailsView(), tag : 1, selection: self.$linkSelection){}
+//                NavigationLink(destination: ActivityDetailsView, tag : 1, selection: self.$linkSelection){}
                 
                 Text("Hello, world!")
                 Spacer()
             }
             .padding()
+            
 //            .navigationTitle("Things to do in Toronto")
             
         }

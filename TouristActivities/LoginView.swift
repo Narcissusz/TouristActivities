@@ -39,7 +39,8 @@ struct LoginView: View {
     var body: some View {
         NavigationView{
             VStack{
-                NavigationLink(destination: ActivitiesView(), tag : 1, selection: self.$linkSelection){}
+                
+//                NavigationLink(destination: ActivityDetailsView(), tag : 1, selection: self.$linkSelection){}
 
     
                 VStack(alignment: .leading, spacing:12) {
