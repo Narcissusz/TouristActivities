@@ -29,6 +29,7 @@ struct ActivitiesView: View {
                     self.dataSource.actovotiesList.remove(atOffsets: indexSet)
                 }
             }//List
+            .listStyle(PlainListStyle())
         }//ZStack
     }
 }

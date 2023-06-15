@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct MainListView: View {
-    
     var reservationDataSource : ActivitiesDataSource = ActivitiesDataSource.getInstance()
-    
     var body: some View {
         TabView {
                     ActivitiesView()
