@@ -56,7 +56,7 @@ struct LoginView: View {
                 SecureField("Enter password", text:$userPasswordFromUI)
                     .disableAutocorrection(true)
                     .textInputAutocapitalization(.never)
-                    .keyboardType(.phonePad)
+                    .keyboardType(.default)
                     .padding(.all)
                     .border(Color.gray)
             }
@@ -74,26 +74,33 @@ struct LoginView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
                             
             Button(action: {
-                    for index in 0...self.userDataSource.userList.count-1 {
-                        if userEmailFromUI == self.userDataSource.userList[index].email && userPasswordFromUI == self.userDataSource.userList[index].password {
-                            if isOn {
-                                UserDefaults.standard.set("true", forKey: "USER_REMEMBER")
-                            }
-                            print("userID = \(self.userDataSource.userList[index].userID)")
-                            UserDefaults.standard.set(self.userDataSource.userList[index].userID, forKey: "USER_ID_LOGIN")
-                            ActivitiesDataSource.getInstance().setFavoritesList()
-                            let window = UIApplication
-                                        .shared
-                                        .connectedScenes
-                                        .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
-                                        .first { $0.isKeyWindow }
-                            window?.rootViewController = UIHostingController(rootView: MainListView())
-                            window?.makeKeyAndVisible()
-                            break
-                        }else{
-                            self.linkSelection = 0
+                
+                if userEmailFromUI != "" && userPasswordFromUI != "" {
+                    self.errorMessage = nil
+                }else{
+                    self.errorMessage = "ERROR: Please enter your email and password"
+                    return
+                }
+                
+                for index in 0...self.userDataSource.userList.count-1 {
+                    if userEmailFromUI == self.userDataSource.userList[index].email && userPasswordFromUI == self.userDataSource.userList[index].password {
+                        if isOn {
+                            UserDefaults.standard.set("true", forKey: "USER_REMEMBER")
                         }
+                        UserDefaults.standard.set(self.userDataSource.userList[index].userID, forKey: "USER_ID_LOGIN")
+                        ActivitiesDataSource.getInstance().setFavoritesList()
+                        let window = UIApplication
+                                    .shared
+                                    .connectedScenes
+                                    .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+                                    .first { $0.isKeyWindow }
+                        window?.rootViewController = UIHostingController(rootView: MainListView())
+                        window?.makeKeyAndVisible()
+                        break
+                    }else{
+                        self.errorMessage = "ERROR: Email or password invalid!!!"
                     }
+                }
             }){
                 Text ("LOG IN")
                     .frame(width: 160, height: 28, alignment: .center)
@@ -109,7 +116,6 @@ struct LoginView: View {
                     .font(.system(size: 14, weight: .bold, design: .default))
             }
             Spacer()
-       
         }
         .padding()
     }
