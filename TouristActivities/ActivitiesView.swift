@@ -8,25 +8,28 @@
 import SwiftUI
 
 struct ActivitiesView: View {
-    @StateObject private var dataSource : ActivitiesDataSource = ActivitiesDataSource()
+//    @StateObject private var dataSource : ActivitiesDataSource = ActivitiesDataSource()
+    @EnvironmentObject var dataSource : ActivitiesDataSource
     
-    var body: some View {        
-        List{
-            ForEach(self.dataSource.actovotiesList){curactivity in
-                NavigationLink{
-                    ActivityDetailsView(activity: curactivity)
-                }label: {
-                    CustomActivitiesListView(activities: curactivity)
-                }//Navigation Link
-                .navigationTitle("Things to do in Toronto")
-//                .navigationBarTitleDisplayMode(.inline)
-            }//ForEach
-            .onDelete {
-                // boilerplate code from documentation
-                indexSet in
-                self.dataSource.actovotiesList.remove(atOffsets: indexSet)
-            }
-        }//List
+    var body: some View {
+        VStack(){
+            Text("Things to do in Toronto")
+                .font(.system(size: 26, weight: .bold, design: .default))
+            List{
+                ForEach(self.dataSource.actovotiesList){curactivity in
+                    NavigationLink{
+                        ActivityDetailsView(activity: curactivity)
+                    }label: {
+                        CustomActivitiesListView(activities: curactivity)
+                    }//Navigation Link
+                }//ForEach
+                .onDelete {
+                    // boilerplate code from documentation
+                    indexSet in
+                    self.dataSource.actovotiesList.remove(atOffsets: indexSet)
+                }
+            }//List
+        }//ZStack
     }
 }
 

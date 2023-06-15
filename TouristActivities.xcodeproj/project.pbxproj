@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2B10DC002A3AD18300ADA3E3 /* ActivitiesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DBFF2A3AD18300ADA3E3 /* ActivitiesDataSource.swift */; };
 		2B10DC022A3AD74800ADA3E3 /* CustomActivitiesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DC012A3AD74800ADA3E3 /* CustomActivitiesListView.swift */; };
+		2B10DC042A3B6A7B00ADA3E3 /* UserDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DC032A3B6A7B00ADA3E3 /* UserDataSource.swift */; };
+		2B10DC062A3B6E7200ADA3E3 /* MainListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DC052A3B6E7200ADA3E3 /* MainListView.swift */; };
 		2B595DEC2A37ACFB0034BD42 /* TouristActivitiesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B595DEB2A37ACFB0034BD42 /* TouristActivitiesApp.swift */; };
 		2B595DEE2A37ACFB0034BD42 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B595DED2A37ACFB0034BD42 /* ContentView.swift */; };
 		2B595DF02A37ACFC0034BD42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B595DEF2A37ACFC0034BD42 /* Assets.xcassets */; };
@@ -24,6 +26,8 @@
 /* Begin PBXFileReference section */
 		2B10DBFF2A3AD18300ADA3E3 /* ActivitiesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesDataSource.swift; sourceTree = "<group>"; };
 		2B10DC012A3AD74800ADA3E3 /* CustomActivitiesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivitiesListView.swift; sourceTree = "<group>"; };
+		2B10DC032A3B6A7B00ADA3E3 /* UserDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataSource.swift; sourceTree = "<group>"; };
+		2B10DC052A3B6E7200ADA3E3 /* MainListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListView.swift; sourceTree = "<group>"; };
 		2B595DE82A37ACFB0034BD42 /* TouristActivities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouristActivities.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B595DEB2A37ACFB0034BD42 /* TouristActivitiesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouristActivitiesApp.swift; sourceTree = "<group>"; };
 		2B595DED2A37ACFB0034BD42 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -103,6 +107,8 @@
 				2B595DEF2A37ACFC0034BD42 /* Assets.xcassets */,
 				2B595DF12A37ACFC0034BD42 /* Preview Content */,
 				2B10DBFF2A3AD18300ADA3E3 /* ActivitiesDataSource.swift */,
+				2B10DC032A3B6A7B00ADA3E3 /* UserDataSource.swift */,
+				2B10DC052A3B6E7200ADA3E3 /* MainListView.swift */,
 			);
 			path = TouristActivities;
 			sourceTree = "<group>";
@@ -186,6 +192,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B60003F2A37BFBF00D96C9A /* LoginView.swift in Sources */,
+				2B10DC062A3B6E7200ADA3E3 /* MainListView.swift in Sources */,
 				2B595DEE2A37ACFB0034BD42 /* ContentView.swift in Sources */,
 				714D69002A3A875B0090C5A9 /* ActivityModel.swift in Sources */,
 				2B595DEC2A37ACFB0034BD42 /* TouristActivitiesApp.swift in Sources */,
@@ -193,6 +200,7 @@
 				2B10DC002A3AD18300ADA3E3 /* ActivitiesDataSource.swift in Sources */,
 				714D69042A3A8D400090C5A9 /* ActivityImage.swift in Sources */,
 				2B6000412A37C4AB00D96C9A /* ActivitiesView.swift in Sources */,
+				2B10DC042A3B6A7B00ADA3E3 /* UserDataSource.swift in Sources */,
 				2B10DC022A3AD74800ADA3E3 /* CustomActivitiesListView.swift in Sources */,
 				2B6000432A37C56800D96C9A /* ActivityDetailsView.swift in Sources */,
 			);

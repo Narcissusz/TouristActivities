@@ -40,7 +40,7 @@ struct LoginView: View {
         NavigationView{
             VStack{
                 
-                NavigationLink(destination: ActivitiesView(), tag : 1, selection: self.$linkSelection){}
+                NavigationLink(destination: MainListView(), tag : 1, selection: self.$linkSelection){}
 
                 VStack(alignment: .leading, spacing:12) {
                     Text("Email:")
@@ -66,6 +66,8 @@ struct LoginView: View {
                 
                 Button(action: {
                     self.linkSelection = 1
+                    
+                    
                 }){
                     Text ("LOG IN")
                         .frame(width: 160, height: 28, alignment: .center)

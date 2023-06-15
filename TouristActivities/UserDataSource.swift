@@ -1,5 +1,5 @@
 //
-//  ActivitiesDataSource.swift
+//  UserDataSource.swift
 //  TouristActivities
 //
 //  Created by Wiwat Thaphon on 2023-06-15.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-class ActivitiesDataSource : ObservableObject{
+class UserDataSource : ObservableObject{
     
-    @Published var actovotiesList : [Activity] = [
+    @Published var userList : [Activity] = [
         
         Activity(
             title: "Goat Yoga and Wine Tasting",
@@ -72,17 +72,5 @@ class ActivitiesDataSource : ObservableObject{
                      ActivityImage(id: 5, title: "Pottery wheel", imageName: "pottery-wheel5")],
             contactInfo: "(123) 456-7890")
     ]
-    
-    //singleton instance
-    private static var shared : ActivitiesDataSource?
-    
-    static func getInstance() -> ActivitiesDataSource{
-        if (shared == nil){
-            shared = ActivitiesDataSource()
-        }
-        
-        return shared!
-    }
 }
-
 
