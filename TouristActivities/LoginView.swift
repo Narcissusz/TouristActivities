@@ -83,22 +83,26 @@ struct LoginView: View {
                 }
                 for index in 0...self.userDataSource.userList.count-1 {
                     if userEmailFromUI == self.userDataSource.userList[index].email && userPasswordFromUI == self.userDataSource.userList[index].password {
-                        if isOn {
-                            UserDefaults.standard.set("true", forKey: "USER_REMEMBER")
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            if isOn {
+                                UserDefaults.standard.set("true", forKey: "USER_REMEMBER")
+                            }
+                            UserDefaults.standard.set(self.userDataSource.userList[index].userID, forKey: "USER_ID_LOGIN")
+                            ActivitiesDataSource.getInstance().setFavoritesList()
+             
+                            UserDefaults.standard.set(self.userDataSource.userList[index].userID, forKey: "USER_ID_LOGIN")
+                            ActivitiesDataSource.getInstance().setFavoritesList()
+                            let window = UIApplication
+                                .shared
+                                .connectedScenes
+                                .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+                                .first { $0.isKeyWindow }
+                            window?.rootViewController = UIHostingController(rootView: MainListView())
+                            window?.makeKeyAndVisible()
                         }
-                        UserDefaults.standard.set(self.userDataSource.userList[index].userID, forKey: "USER_ID_LOGIN")
-                        ActivitiesDataSource.getInstance().setFavoritesList()
-         
-                        UserDefaults.standard.set(self.userDataSource.userList[index].userID, forKey: "USER_ID_LOGIN")
-                        ActivitiesDataSource.getInstance().setFavoritesList()
-                        let window = UIApplication
-                            .shared
-                            .connectedScenes
-                            .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
-                            .first { $0.isKeyWindow }
-                        window?.rootViewController = UIHostingController(rootView: MainListView())
-                        window?.makeKeyAndVisible()
                         break
+                        
                     }else{
                         self.errorMessage = "ERROR: Email or password invalid!!!"
                     }
