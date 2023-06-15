@@ -2,14 +2,14 @@
 //  ActivityDetailsView.swift
 //  TouristActivities
 //
-//  Created by Wiwat Thaphon on 2023-06-12.
+//  Created by Mahin Pathan on 2023-06-12.
 //
 
 import SwiftUI
 
 struct ActivityDetailsView: View {
     
-    @State private var isFavorite = false
+    @State var isFavorite:Bool
     @EnvironmentObject var dataSource : ActivitiesDataSource
     
     let activity:Activity
@@ -21,6 +21,10 @@ struct ActivityDetailsView: View {
     var offColor = Color.gray
     var onColor = Color.orange.opacity(2)
     
+    init(activity:Activity){
+        self.activity = activity
+        _isFavorite = State(initialValue: activity.isFavorite())
+    }
     
     var body: some View {
         
@@ -70,7 +74,7 @@ struct ActivityDetailsView: View {
                     
                     Text("What you'll do:")
                         .bold(true).italic()
-
+                    
                     Text(activity.description)
                         .font(.body)
                         .italic()
@@ -81,7 +85,7 @@ struct ActivityDetailsView: View {
                         ForEach(1..<maximumRating + 1, id: \.self) { number in
                             image(for: number)
                                 .foregroundColor(number > activity.rating ? offColor : onColor)
-                            }
+                        }
                     }
                     Spacer(minLength: 40)
                     
@@ -106,20 +110,24 @@ struct ActivityDetailsView: View {
                         Link(destination: makePhoneCallURL()) {
                             Text(activity.contactInfo)
                                 .foregroundColor(.blue)
-                    }
+                        }
                         Spacer()
                     }
                 }
                 HStack{
                     Button(action: {
                         isFavorite.toggle()
-                        dataSource.addFavorite(activity: activity)
+                        if(isFavorite){
+                            dataSource.addFavorite(activity: activity)
+                        }else{
+                            dataSource.removeFavorite(activityId:activity.id)
+                        }
                         
                     })
                     {
-            Image(systemName: isFavorite ? "heart.fill" : "heart")
+                        Image(systemName: isFavorite ? "heart.fill" : "heart")
                             .foregroundColor(isFavorite ? .red : .gray)
-                                .font(.system(size: 24))
+                            .font(.system(size: 24))
                         Text(isFavorite ? "FAVOURITED!" :"FAVOURITE" )
                             .foregroundColor(.purple.opacity(2))
                             .bold()
@@ -128,18 +136,18 @@ struct ActivityDetailsView: View {
                     }
                     .buttonStyle(.bordered)
                     .background(.white.opacity(2))
-
                     
-                
+                    
+                    
                     
                     ShareLink(item: "\(activity.title) For  \(activity.formattedPrice())"){
                         Text("⇧  SHARE").font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.purple.opacity(2))
-                        .cornerRadius(8)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.purple.opacity(2))
+                            .cornerRadius(8)
                     }
-            
+                    
                 }
             }
             .padding()
@@ -148,12 +156,12 @@ struct ActivityDetailsView: View {
     
     private func makePhoneCallURL() -> URL {
         var phoneNumberWithoutSpaces = activity.contactInfo.filter { $0.isNumber }
-           let urlString = "tel://\(phoneNumberWithoutSpaces)"
-           return URL(string: urlString)!
-       }
+        let urlString = "tel://\(phoneNumberWithoutSpaces)"
+        return URL(string: urlString)!
+    }
     
     
-  
+    
     func image(for number: Int) -> Image {
         if number > activity.rating {
             return offImage ?? onImage
@@ -170,7 +178,7 @@ struct ActivityDetailsView_Previews: PreviewProvider {
                       ActivityImage(id: 1, title: "CN Tower at top", imageName: "cn2"),
                       ActivityImage(id: 2, title: "CN Tower at night", imageName: "cn3"),
                       ActivityImage(id: 3, title: "CN Tower edge walk", imageName: "cn4")]
-        let activityModel = Activity(title: "ActivtiyName", description: "The CN Tower is a 553.3 m-high concrete communications and observation tower in Toronto, Ontario, Canada. Completed in 1976, it is located in downtown Toronto, built on the former Railway Lands. Its name CN referred to Canadian National, the railway company that built the tower", rating: 4, host: "Lucas Black", price: 89.45, images: images, contactInfo:"111-222-3333")
+        let activityModel = Activity(id:"1",title: "ActivtiyName", description: "The CN Tower is a 553.3 m-high concrete communications and observation tower in Toronto, Ontario, Canada. Completed in 1976, it is located in downtown Toronto, built on the former Railway Lands. Its name CN referred to Canadian National, the railway company that built the tower", rating: 4, host: "Lucas Black", price: 89.45, images: images, contactInfo:"111-222-3333")
         
         ActivityDetailsView(activity: activityModel)
     }

@@ -12,16 +12,16 @@ struct iOSCheckboxToggleStyle: ToggleStyle {
         
         // 1
         Button(action: {
-
+            
             // 2
             configuration.isOn.toggle()
-
+            
         }, label: {
             HStack {
                 // 3
                 Image(systemName: configuration.isOn ? "checkmark.square" : "square")
-             
-
+                
+                
                 configuration.label
             }
         })
@@ -37,7 +37,7 @@ struct LoginView: View {
     @State private var userPasswordFromUI:String = ""
     @EnvironmentObject var userDataSource : UserDataSource
     @State var isActive : Bool = false
-        
+    
     var body: some View {
         VStack{
             Spacer()
@@ -72,7 +72,7 @@ struct LoginView: View {
                 .toggleStyle(iOSCheckboxToggleStyle())
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-                            
+            
             Button(action: {
                 
                 if userEmailFromUI != "" && userPasswordFromUI != "" {
@@ -81,7 +81,6 @@ struct LoginView: View {
                     self.errorMessage = "ERROR: Please enter your email and password"
                     return
                 }
-                
                 for index in 0...self.userDataSource.userList.count-1 {
                     if userEmailFromUI == self.userDataSource.userList[index].email && userPasswordFromUI == self.userDataSource.userList[index].password {
                         if isOn {
@@ -89,11 +88,14 @@ struct LoginView: View {
                         }
                         UserDefaults.standard.set(self.userDataSource.userList[index].userID, forKey: "USER_ID_LOGIN")
                         ActivitiesDataSource.getInstance().setFavoritesList()
+         
+                        UserDefaults.standard.set(self.userDataSource.userList[index].userID, forKey: "USER_ID_LOGIN")
+                        ActivitiesDataSource.getInstance().setFavoritesList()
                         let window = UIApplication
-                                    .shared
-                                    .connectedScenes
-                                    .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
-                                    .first { $0.isKeyWindow }
+                            .shared
+                            .connectedScenes
+                            .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+                            .first { $0.isKeyWindow }
                         window?.rootViewController = UIHostingController(rootView: MainListView())
                         window?.makeKeyAndVisible()
                         break
@@ -116,6 +118,7 @@ struct LoginView: View {
                     .font(.system(size: 14, weight: .bold, design: .default))
             }
             Spacer()
+
         }
         .padding()
     }
