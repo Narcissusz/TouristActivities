@@ -81,7 +81,7 @@ struct LoginView: View {
                         }
                         print("userID = \(self.userDataSource.userList[index].userID)")
                         UserDefaults.standard.set(self.userDataSource.userList[index].userID, forKey: "USER_ID_LOGIN")
-                        ActivitiesDataSource.getInstance().setFavoritesList()
+                        
                         let window = UIApplication
                             .shared
                             .connectedScenes

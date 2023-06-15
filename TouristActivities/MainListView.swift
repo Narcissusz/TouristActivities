@@ -12,6 +12,9 @@ struct MainListView: View {
 //    @EnvironmentObject var userID : String
 //    @Binding var rootIsActive : Bool
     
+    init() {
+        self.reservationDataSource.setFavoritesList()
+    }
     var body: some View {
    
         TabView{
