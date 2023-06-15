@@ -9,8 +9,11 @@ import SwiftUI
 
 struct MainListView: View {
     var reservationDataSource : ActivitiesDataSource = ActivitiesDataSource.getInstance()
-//    @EnvironmentObject var userID : String
 
+    init() {
+        self.reservationDataSource.setFavoritesList()
+    }
+    
     var body: some View {
         TabView{
             ActivitiesView()
