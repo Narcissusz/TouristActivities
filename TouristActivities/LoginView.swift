@@ -56,7 +56,7 @@ struct LoginView: View {
                 SecureField("Enter password", text:$userPasswordFromUI)
                     .disableAutocorrection(true)
                     .textInputAutocapitalization(.never)
-                    .keyboardType(.phonePad)
+                    .keyboardType(.default)
                     .padding(.all)
                     .border(Color.gray)
             }
@@ -74,12 +74,21 @@ struct LoginView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             
             Button(action: {
+                
+                if userEmailFromUI != "" && userPasswordFromUI != "" {
+                    self.errorMessage = nil
+                }else{
+                    self.errorMessage = "ERROR: Please enter your email and password"
+                    return
+                }
                 for index in 0...self.userDataSource.userList.count-1 {
                     if userEmailFromUI == self.userDataSource.userList[index].email && userPasswordFromUI == self.userDataSource.userList[index].password {
                         if isOn {
                             UserDefaults.standard.set("true", forKey: "USER_REMEMBER")
                         }
-                        print("userID = \(self.userDataSource.userList[index].userID)")
+                        UserDefaults.standard.set(self.userDataSource.userList[index].userID, forKey: "USER_ID_LOGIN")
+                        ActivitiesDataSource.getInstance().setFavoritesList()
+         
                         UserDefaults.standard.set(self.userDataSource.userList[index].userID, forKey: "USER_ID_LOGIN")
                         
                         let window = UIApplication
@@ -91,7 +100,7 @@ struct LoginView: View {
                         window?.makeKeyAndVisible()
                         break
                     }else{
-                        self.linkSelection = 0
+                        self.errorMessage = "ERROR: Email or password invalid!!!"
                     }
                 }
             }){
@@ -109,7 +118,7 @@ struct LoginView: View {
                     .font(.system(size: 14, weight: .bold, design: .default))
             }
             Spacer()
-            
+
         }
         .padding()
     }
