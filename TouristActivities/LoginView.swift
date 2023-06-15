@@ -12,16 +12,16 @@ struct iOSCheckboxToggleStyle: ToggleStyle {
         
         // 1
         Button(action: {
-
+            
             // 2
             configuration.isOn.toggle()
-
+            
         }, label: {
             HStack {
                 // 3
                 Image(systemName: configuration.isOn ? "checkmark.square" : "square")
-             
-
+                
+                
                 configuration.label
             }
         })
@@ -37,7 +37,7 @@ struct LoginView: View {
     @State private var userPasswordFromUI:String = ""
     @EnvironmentObject var userDataSource : UserDataSource
     @State var isActive : Bool = false
-        
+    
     var body: some View {
         VStack{
             Spacer()
@@ -72,28 +72,28 @@ struct LoginView: View {
                 .toggleStyle(iOSCheckboxToggleStyle())
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-                            
+            
             Button(action: {
-                    for index in 0...self.userDataSource.userList.count-1 {
-                        if userEmailFromUI == self.userDataSource.userList[index].email && userPasswordFromUI == self.userDataSource.userList[index].password {
-                            if isOn {
-                                UserDefaults.standard.set("true", forKey: "USER_REMEMBER")
-                            }
-                            print("userID = \(self.userDataSource.userList[index].userID)")
-                            UserDefaults.standard.set(self.userDataSource.userList[index].userID, forKey: "USER_ID_LOGIN")
-                            ActivitiesDataSource.getInstance().setFavoritesList()
-                            let window = UIApplication
-                                        .shared
-                                        .connectedScenes
-                                        .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
-                                        .first { $0.isKeyWindow }
-                            window?.rootViewController = UIHostingController(rootView: MainListView())
-                            window?.makeKeyAndVisible()
-                            break
-                        }else{
-                            self.linkSelection = 0
+                for index in 0...self.userDataSource.userList.count-1 {
+                    if userEmailFromUI == self.userDataSource.userList[index].email && userPasswordFromUI == self.userDataSource.userList[index].password {
+                        if isOn {
+                            UserDefaults.standard.set("true", forKey: "USER_REMEMBER")
                         }
+                        print("userID = \(self.userDataSource.userList[index].userID)")
+                        UserDefaults.standard.set(self.userDataSource.userList[index].userID, forKey: "USER_ID_LOGIN")
+                        ActivitiesDataSource.getInstance().setFavoritesList()
+                        let window = UIApplication
+                            .shared
+                            .connectedScenes
+                            .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+                            .first { $0.isKeyWindow }
+                        window?.rootViewController = UIHostingController(rootView: MainListView())
+                        window?.makeKeyAndVisible()
+                        break
+                    }else{
+                        self.linkSelection = 0
                     }
+                }
             }){
                 Text ("LOG IN")
                     .frame(width: 160, height: 28, alignment: .center)
@@ -109,7 +109,7 @@ struct LoginView: View {
                     .font(.system(size: 14, weight: .bold, design: .default))
             }
             Spacer()
-       
+            
         }
         .padding()
     }
