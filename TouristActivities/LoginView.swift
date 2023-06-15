@@ -29,7 +29,6 @@ struct iOSCheckboxToggleStyle: ToggleStyle {
 }
 
 struct LoginView: View {
-    
     @State private var errorMessage:String? = nil
     @State private var linkSelection : Int? = nil
     @State private var isOn = false
@@ -37,6 +36,7 @@ struct LoginView: View {
     @State private var userPasswordFromUI:String = ""
     @EnvironmentObject var userDataSource : UserDataSource
     @State var isActive : Bool = false
+    @State var isCanLogin : Bool = false
     
     var body: some View {
         VStack{
@@ -83,7 +83,7 @@ struct LoginView: View {
                 }
                 for index in 0...self.userDataSource.userList.count-1 {
                     if userEmailFromUI == self.userDataSource.userList[index].email && userPasswordFromUI == self.userDataSource.userList[index].password {
-                        
+                        isCanLogin = true
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                             if isOn {
                                 UserDefaults.standard.set("true", forKey: "USER_REMEMBER")
@@ -102,10 +102,13 @@ struct LoginView: View {
                             window?.makeKeyAndVisible()
                         }
                         break
-                        
                     }else{
-                        self.errorMessage = "ERROR: Email or password invalid!!!"
+                        isCanLogin = false
                     }
+                }
+                
+                if !isCanLogin {
+                    self.errorMessage = "ERROR: Email or password invalid!!!"
                 }
             }){
                 Text ("LOG IN")
@@ -115,14 +118,12 @@ struct LoginView: View {
                     .background(Color.cyan)
                     .foregroundColor(Color.white)
             }
-            
             if let errMsg = errorMessage {
                 Text(errMsg)
                     .foregroundColor(.red)
                     .font(.system(size: 14, weight: .bold, design: .default))
             }
             Spacer()
-
         }
         .padding()
     }
