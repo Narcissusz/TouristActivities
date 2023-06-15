@@ -70,7 +70,9 @@ struct LoginView: View {
                     for index in 0...self.userDataSource.userList.count-1 {
                         if userEmailFromUI == self.userDataSource.userList[index].email && userPasswordFromUI == self.userDataSource.userList[index].password {
                             self.linkSelection = 1
-//                            UserDefaults.standard.set(self.userDataSource.userList[index].userID, forKey: "KEY_LOGIN")
+                            UserDefaults.standard.set(self.userDataSource.userList[index].userID, forKey: "USER_ID_LOGIN")
+                            
+                            ActivitiesDataSource.getInstance().setFavoritesList()
                             
                             break
                         }else{

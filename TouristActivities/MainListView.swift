@@ -10,6 +10,7 @@ import SwiftUI
 struct MainListView: View {
     var reservationDataSource : ActivitiesDataSource = ActivitiesDataSource.getInstance()
 //    @EnvironmentObject var userID : String
+    
     var body: some View {
         TabView{
             ActivitiesView()
@@ -20,7 +21,7 @@ struct MainListView: View {
             FavoritesView()
                 .environmentObject(reservationDataSource)
                 .tabItem {
-                    Label("Favorite", systemImage: "list.dash")
+                    Label("Favorite", systemImage: "heart.fill")
                 }
         }
         .toolbar {

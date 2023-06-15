@@ -8,6 +8,7 @@
 import Foundation
 
 class Activity : Identifiable {
+    var id = UUID()
     var title:String
     var description:String
     var rating:Int
@@ -25,6 +26,9 @@ class Activity : Identifiable {
         self.contactInfo = contactInfo
         self.images = images
     }
-  
+ 
+    func formattedPrice()->String{
+        return "\(String(format: "$%.2f", self.price))/person"
+    }
 }
  

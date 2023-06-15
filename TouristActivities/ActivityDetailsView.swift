@@ -10,7 +10,8 @@ import SwiftUI
 struct ActivityDetailsView: View {
     
     @State private var isFavorite = false
-
+    @EnvironmentObject var dataSource : ActivitiesDataSource
+    
     let activity:Activity
     
     var maximumRating = 5
@@ -34,7 +35,7 @@ struct ActivityDetailsView: View {
                     Text("Price:")
                         .font(.title3)
                         .bold()
-                    Text("\(String(format: "$%.2f", activity.price))/person")
+                    Text(activity.formattedPrice())
                         .font(.body)
                         .foregroundColor(.black)
                 }
@@ -99,29 +100,16 @@ struct ActivityDetailsView: View {
                             .font(.body)
                             .bold()
                         
+                        
+                        
+                        
                         Link(destination: makePhoneCallURL()) {
                             Text(activity.contactInfo)
                                 .foregroundColor(.blue)
                     }
+
                         
-                        
-                        
-//                        Button(action: {
-//                                            dialPhoneNumber(activity.contactInfo)
-//                                        }) {
-//                                            Text(activity.contactInfo)
-//                                                .font(.headline)
-//                                                .foregroundColor(.purple)
-//                                        }
-//
-                        
-                        
-//                        Text(activity.contactInfo)
-//                            .onTapGesture {
-//
-//                            }
-//                            .font(.body)
-//                            .foregroundColor(.black)
+                    
                         Spacer()
                     }
                     
@@ -130,8 +118,8 @@ struct ActivityDetailsView: View {
                 HStack{
                     Button(action: {
                         isFavorite.toggle()
+                        dataSource.addFavorite(activity: activity)
                         
-//                        TODO Add and remove to Favorite
                     })
                     {
             Image(systemName: isFavorite ? "heart.fill" : "heart")
@@ -146,17 +134,17 @@ struct ActivityDetailsView: View {
                     .buttonStyle(.bordered)
                     .background(.white.opacity(2))
 
-                    Button(action: {
-                        
-                    })
-                    {
-                    Text("⇧  SHARE")
-                        .font(.headline)
+                    
+                
+                    
+                    ShareLink(item: "\(activity.title) For  \(activity.formattedPrice())"){
+                        Text("⇧  SHARE").font(.headline)
                         .foregroundColor(.white)
                         .padding()
                         .background(Color.purple.opacity(2))
                         .cornerRadius(8)
                     }
+            
                 }
             }
             .padding()
@@ -170,11 +158,7 @@ struct ActivityDetailsView: View {
        }
     
     
-//    private func dialPhoneNumber(_ phoneNumber: String) {
-//            guard let dialURL = URL(string: "tel:\(phoneNumber)") else { return }
-//            UIApplication.shared.open(dialURL, options: [:], completionHandler: nil)
-//        }
-        
+  
     func image(for number: Int) -> Image {
         if number > activity.rating {
             return offImage ?? onImage
