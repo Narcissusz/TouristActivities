@@ -9,7 +9,7 @@ import Foundation
 
 class ActivitiesDataSource : ObservableObject{
     
-    @Published var actovotiesList : [Activity] = [
+    @Published var activitiesList : [Activity] = [
         
         Activity(
             title: "Goat Yoga and Wine Tasting",
@@ -73,6 +73,8 @@ class ActivitiesDataSource : ObservableObject{
             contactInfo: "(123) 456-7890")
     ]
     
+    
+    @Published var favoritesList:[Activity] = []
     //singleton instance
     private static var shared : ActivitiesDataSource?
     
@@ -81,6 +83,54 @@ class ActivitiesDataSource : ObservableObject{
             shared = ActivitiesDataSource()
         }
         return shared!
+    }
+    
+    func getLoggedInUserId() -> String{
+        return UserDefaults.standard.string(forKey: "USER_ID_LOGIN") ?? "0"
+    }
+    
+    func getLoggedInUserFavoriteKey()->String{
+        return "\(self.getLoggedInUserId())_FAVORITES"
+    }
+    
+    func addFavorite(activity:Activity){
+        var activities = self.getUserFavoritesActivityIds()
+        activities.append(activity.id.uuidString)
+        UserDefaults.standard.set(activities, forKey: self.getLoggedInUserFavoriteKey())
+        self.setFavoritesList()
+    }
+    
+    func getUserFavoritesActivityIds() -> [String]{
+        let favoriteActivities = UserDefaults.standard.array(forKey: self.getLoggedInUserFavoriteKey()) as? [String] ?? []
+        return favoriteActivities
+    }
+    
+    func removeFavorite(offsets: IndexSet){
+        var activities = self.getUserFavoritesActivityIds()
+        activities.remove(atOffsets: offsets)
+        UserDefaults.standard.set(activities, forKey: self.getLoggedInUserFavoriteKey())
+        self.setFavoritesList()
+    }
+    
+    func removeAllFavorites(){
+        let activities:[String] = []
+        UserDefaults.standard.set(activities, forKey: self.getLoggedInUserFavoriteKey())
+        self.setFavoritesList()
+    }
+    
+    func getUserFavorites() -> [Activity]{
+        var activities:[Activity] = []
+        let activitiyIds = self.getUserFavoritesActivityIds()
+        for index in 0...activitiesList.count-1 {
+            if activitiyIds.contains(activitiesList[index].id.uuidString ){
+                activities.append(activitiesList[index])
+            }
+        }
+        return activities
+    }
+    
+    func setFavoritesList(){
+        self.favoritesList = self.getUserFavorites()
     }
 }
 

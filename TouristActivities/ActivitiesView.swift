@@ -16,9 +16,9 @@ struct ActivitiesView: View {
             Text("Things to do in Toronto")
                 .font(.system(size: 26, weight: .bold, design: .default))
             List{
-                ForEach(self.dataSource.actovotiesList){curactivity in
+                ForEach(self.dataSource.activitiesList){curactivity in
                     NavigationLink{
-                        ActivityDetailsView(activity: curactivity)
+                        ActivityDetailsView(activity: curactivity).environmentObject(dataSource)
                     }label: {
                         CustomActivitiesListView(activities: curactivity)
                     }//Navigation Link
@@ -26,7 +26,7 @@ struct ActivitiesView: View {
                 .onDelete {
                     // boilerplate code from documentation
                     indexSet in
-                    self.dataSource.actovotiesList.remove(atOffsets: indexSet)
+                    self.dataSource.activitiesList.remove(atOffsets: indexSet)
                 }
             }//List
             .listStyle(PlainListStyle())
