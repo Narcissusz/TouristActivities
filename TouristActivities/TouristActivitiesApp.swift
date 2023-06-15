@@ -14,13 +14,14 @@ struct TouristActivitiesApp: App {
     
     var body: some Scene {
         WindowGroup {
-            LoginView().environmentObject(userDS)
+//            LoginView().environmentObject(userDS)
+//            MainListView()
             
-//            if let userID = UserDefaults.standard.string(forKey: "KEY_LOGIN"){
-//                MainListView()
-//            }else{
-//                LoginView().environmentObject(userDS)
-//            }
+            if let userID = UserDefaults.standard.string(forKey: "USER_ID_LOGIN"){
+                MainListView()
+            }else{
+                LoginView().environmentObject(userDS)
+            }
             
         }
     }
