@@ -10,8 +10,10 @@ import SwiftUI
 struct MainListView: View {
     var reservationDataSource : ActivitiesDataSource = ActivitiesDataSource.getInstance()
 //    @EnvironmentObject var userID : String
+//    @Binding var rootIsActive : Bool
     
     var body: some View {
+   
         TabView{
             ActivitiesView()
                 .environmentObject(reservationDataSource)
@@ -23,14 +25,6 @@ struct MainListView: View {
                 .tabItem {
                     Label("Favorite", systemImage: "heart.fill")
                 }
-        }
-        .toolbar {
-            // 1
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Logout") {
-                    UserDefaults.standard.removeObject(forKey: "KEY_LOGIN")
-                }
-            }
         }
     }
 }

@@ -107,13 +107,8 @@ struct ActivityDetailsView: View {
                             Text(activity.contactInfo)
                                 .foregroundColor(.blue)
                     }
-
-                        
-                    
                         Spacer()
                     }
-                    
-                    
                 }
                 HStack{
                     Button(action: {

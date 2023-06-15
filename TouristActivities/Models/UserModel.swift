@@ -12,13 +12,11 @@ class User : Identifiable {
     var email:String
     var password:String
     var isLogin:Bool
-    var favorite:[Activity]
     
-    init(userID: String, email: String, password: String, isLogin: Bool, favorite:[Activity]) {
+    init(userID: String, email: String, password: String, isLogin: Bool) {
         self.userID = userID
         self.email = email
         self.password = password
         self.isLogin = isLogin
-        self.favorite = favorite
     }
 }

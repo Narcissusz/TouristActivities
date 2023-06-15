@@ -36,70 +36,82 @@ struct LoginView: View {
     @State private var userEmailFromUI:String = ""
     @State private var userPasswordFromUI:String = ""
     @EnvironmentObject var userDataSource : UserDataSource
-    
+    @State var isActive : Bool = false
+        
     var body: some View {
-        NavigationView{
-            VStack{
-                NavigationLink(destination: MainListView(), tag : 1, selection: self.$linkSelection){}
-                VStack(alignment: .leading, spacing:12) {
-                    Text("Email:")
-                    TextField("Enter an email", text:$userEmailFromUI)
-                        .disableAutocorrection(true)
-                        .textInputAutocapitalization(.never)
-                        .keyboardType(.default)
-                        .padding(.all)
-                        .border(Color.gray)
-                    Text("Password:")
-                    TextField("Enter password", text:$userPasswordFromUI)
-                        .disableAutocorrection(true)
-                        .textInputAutocapitalization(.never)
-                        .keyboardType(.phonePad)
-                        .padding(.all)
-                        .border(Color.gray)
+        VStack{
+            Spacer()
+            Text("Activities in Toronto")
+                .font(.system(size: 30, weight: .bold, design: .default))
+            Spacer()
+            VStack(alignment: .leading, spacing:12) {
+                Text("Email:")
+                TextField("Enter an email", text:$userEmailFromUI)
+                    .disableAutocorrection(true)
+                    .textInputAutocapitalization(.never)
+                    .keyboardType(.default)
+                    .padding(.all)
+                    .border(Color.gray)
+                Text("Password:")
+                SecureField("Enter password", text:$userPasswordFromUI)
+                    .disableAutocorrection(true)
+                    .textInputAutocapitalization(.never)
+                    .keyboardType(.phonePad)
+                    .padding(.all)
+                    .border(Color.gray)
+            }
+            
+            VStack {
+                Toggle(isOn: $isOn) {
+                    Text("Remember Me")
                 }
-                
-                VStack {
-                    Toggle(isOn: $isOn) {
-                        Text("Remember Me")
-                    }
-                    .toggleStyle(iOSCheckboxToggleStyle())
+                .onChange(of: isOn) { value in
+                    // action...
+                    isOn = value
                 }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                                
-                Button(action: {
+                .toggleStyle(iOSCheckboxToggleStyle())
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+                            
+            Button(action: {
                     for index in 0...self.userDataSource.userList.count-1 {
                         if userEmailFromUI == self.userDataSource.userList[index].email && userPasswordFromUI == self.userDataSource.userList[index].password {
-                            self.linkSelection = 1
+                            if isOn {
+                                UserDefaults.standard.set("true", forKey: "USER_REMEMBER")
+                            }
+                            print("userID = \(self.userDataSource.userList[index].userID)")
                             UserDefaults.standard.set(self.userDataSource.userList[index].userID, forKey: "USER_ID_LOGIN")
-                            
                             ActivitiesDataSource.getInstance().setFavoritesList()
-                            
+                            let window = UIApplication
+                                        .shared
+                                        .connectedScenes
+                                        .flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+                                        .first { $0.isKeyWindow }
+                            window?.rootViewController = UIHostingController(rootView: MainListView())
+                            window?.makeKeyAndVisible()
                             break
                         }else{
                             self.linkSelection = 0
                         }
                     }
-                }){
-                    Text ("LOG IN")
-                        .frame(width: 160, height: 28, alignment: .center)
-                        .padding(.horizontal, 20)
-                        .padding(.vertical, 10)
-                        .background(Color.cyan)
-                        .foregroundColor(Color.white)
-                }
-                
-                if let errMsg = errorMessage {
-                    Text(errMsg)
-                        .foregroundColor(.red)
-                        .font(.system(size: 14, weight: .bold, design: .default))
-                }
-           
+            }){
+                Text ("LOG IN")
+                    .frame(width: 160, height: 28, alignment: .center)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 10)
+                    .background(Color.cyan)
+                    .foregroundColor(Color.white)
             }
             
-            .padding()
-            .navigationTitle("Tourist Activities")
-            
+            if let errMsg = errorMessage {
+                Text(errMsg)
+                    .foregroundColor(.red)
+                    .font(.system(size: 14, weight: .bold, design: .default))
+            }
+            Spacer()
+       
         }
+        .padding()
     }
 }
 
