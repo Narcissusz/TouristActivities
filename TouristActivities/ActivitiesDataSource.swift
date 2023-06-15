@@ -80,7 +80,6 @@ class ActivitiesDataSource : ObservableObject{
         if (shared == nil){
             shared = ActivitiesDataSource()
         }
-        
         return shared!
     }
 }

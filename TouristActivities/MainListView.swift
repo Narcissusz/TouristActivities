@@ -10,18 +10,26 @@ import SwiftUI
 struct MainListView: View {
     var reservationDataSource : ActivitiesDataSource = ActivitiesDataSource.getInstance()
     var body: some View {
-        TabView {
-                    ActivitiesView()
-                        .environmentObject(reservationDataSource)
-                        .tabItem {
-                            Label("Activities", systemImage: "list.dash")
-                        }
-                    FavoritesView()
-                        .environmentObject(reservationDataSource)
-                        .tabItem {
-                            Label("Favorite", systemImage: "list.dash")
-                        }
+        TabView{
+            ActivitiesView()
+                .environmentObject(reservationDataSource)
+                .tabItem {
+                    Label("Activities", systemImage: "list.dash")
                 }
+            FavoritesView()
+                .environmentObject(reservationDataSource)
+                .tabItem {
+                    Label("Favorite", systemImage: "list.dash")
+                }
+        }
+        .toolbar {
+            // 1
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Logout") {
+                    UserDefaults.standard.removeObject(forKey: "KEY_LOGIN")
+                }
+            }
+        }
     }
 }
 

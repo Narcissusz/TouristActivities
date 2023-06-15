@@ -35,24 +35,27 @@ struct LoginView: View {
     @State private var isOn = false
     @State private var userEmailFromUI:String = ""
     @State private var userPasswordFromUI:String = ""
+    @EnvironmentObject var userDataSource : UserDataSource
     
     var body: some View {
         NavigationView{
             VStack{
-                
                 NavigationLink(destination: MainListView(), tag : 1, selection: self.$linkSelection){}
-
                 VStack(alignment: .leading, spacing:12) {
                     Text("Email:")
                     TextField("Enter an email", text:$userEmailFromUI)
                         .disableAutocorrection(true)
                         .textInputAutocapitalization(.never)
                         .keyboardType(.default)
+                        .padding(.all)
+                        .border(Color.gray)
                     Text("Password:")
                     TextField("Enter password", text:$userPasswordFromUI)
                         .disableAutocorrection(true)
                         .textInputAutocapitalization(.never)
                         .keyboardType(.phonePad)
+                        .padding(.all)
+                        .border(Color.gray)
                 }
                 
                 VStack {
@@ -63,11 +66,17 @@ struct LoginView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                                 
-                
                 Button(action: {
-                    self.linkSelection = 1
-                    
-                    
+                    for index in 0...self.userDataSource.userList.count-1 {
+                        if userEmailFromUI == self.userDataSource.userList[index].email && userPasswordFromUI == self.userDataSource.userList[index].password {
+                            self.linkSelection = 1
+//                            UserDefaults.standard.set(self.userDataSource.userList[index].userID, forKey: "KEY_LOGIN")
+                            
+                            break
+                        }else{
+                            self.linkSelection = 0
+                        }
+                    }
                 }){
                     Text ("LOG IN")
                         .frame(width: 160, height: 28, alignment: .center)
