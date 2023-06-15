@@ -40,12 +40,11 @@ struct LoginView: View {
         NavigationView{
             VStack{
                 
-//                NavigationLink(destination: ActivityDetailsView(), tag : 1, selection: self.$linkSelection){}
+                NavigationLink(destination: ActivitiesView(), tag : 1, selection: self.$linkSelection){}
 
-    
                 VStack(alignment: .leading, spacing:12) {
                     Text("Email:")
-                    TextField("Enter an eamil", text:$userEmailFromUI)
+                    TextField("Enter an email", text:$userEmailFromUI)
                         .disableAutocorrection(true)
                         .textInputAutocapitalization(.never)
                         .keyboardType(.default)
@@ -56,17 +55,20 @@ struct LoginView: View {
                         .keyboardType(.phonePad)
                 }
                 
-                Toggle(isOn: $isOn) {
-                    Text("Remember Me")
+                VStack {
+                    Toggle(isOn: $isOn) {
+                        Text("Remember Me")
+                    }
+                    .toggleStyle(iOSCheckboxToggleStyle())
                 }
-                .toggleStyle(iOSCheckboxToggleStyle())
-                
+                .frame(maxWidth: .infinity, alignment: .leading)
+                                
                 
                 Button(action: {
                     self.linkSelection = 1
                 }){
                     Text ("LOG IN")
-                        .frame(width: 320, height: 28, alignment: .center)
+                        .frame(width: 160, height: 28, alignment: .center)
                         .padding(.horizontal, 20)
                         .padding(.vertical, 10)
                         .background(Color.cyan)
@@ -80,6 +82,7 @@ struct LoginView: View {
                 }
            
             }
+            
             .padding()
             .navigationTitle("Tourist Activities")
             

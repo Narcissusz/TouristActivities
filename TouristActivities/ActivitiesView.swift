@@ -8,23 +8,25 @@
 import SwiftUI
 
 struct ActivitiesView: View {
+    @StateObject private var dataSource : ActivitiesDataSource = ActivitiesDataSource()
     
-    @State private var linkSelection : Int? = nil
-    
-    var body: some View {
-        NavigationView{
-            VStack{
-//                NavigationLink(destination: ActivityDetailsView, tag : 1, selection: self.$linkSelection){}
-                
-                Text("Hello, world!")
-                Spacer()
+    var body: some View {        
+        List{
+            ForEach(self.dataSource.actovotiesList){curactivity in
+                NavigationLink{
+                    ActivityDetailsView(activity: curactivity)
+                }label: {
+                    CustomActivitiesListView(activities: curactivity)
+                }//Navigation Link
+                .navigationTitle("Things to do in Toronto")
+//                .navigationBarTitleDisplayMode(.inline)
+            }//ForEach
+            .onDelete {
+                // boilerplate code from documentation
+                indexSet in
+                self.dataSource.actovotiesList.remove(atOffsets: indexSet)
             }
-            .padding()
-            
-//            .navigationTitle("Things to do in Toronto")
-            
-        }
-        .navigationBarTitleDisplayMode(.inline)
+        }//List
     }
 }
 

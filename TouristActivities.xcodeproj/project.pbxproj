@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B10DC002A3AD18300ADA3E3 /* ActivitiesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DBFF2A3AD18300ADA3E3 /* ActivitiesDataSource.swift */; };
+		2B10DC022A3AD74800ADA3E3 /* CustomActivitiesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B10DC012A3AD74800ADA3E3 /* CustomActivitiesListView.swift */; };
 		2B595DEC2A37ACFB0034BD42 /* TouristActivitiesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B595DEB2A37ACFB0034BD42 /* TouristActivitiesApp.swift */; };
 		2B595DEE2A37ACFB0034BD42 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B595DED2A37ACFB0034BD42 /* ContentView.swift */; };
 		2B595DF02A37ACFC0034BD42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B595DEF2A37ACFC0034BD42 /* Assets.xcassets */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B10DBFF2A3AD18300ADA3E3 /* ActivitiesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesDataSource.swift; sourceTree = "<group>"; };
+		2B10DC012A3AD74800ADA3E3 /* CustomActivitiesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivitiesListView.swift; sourceTree = "<group>"; };
 		2B595DE82A37ACFB0034BD42 /* TouristActivities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TouristActivities.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B595DEB2A37ACFB0034BD42 /* TouristActivitiesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouristActivitiesApp.swift; sourceTree = "<group>"; };
 		2B595DED2A37ACFB0034BD42 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +48,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B10DBFC2A3AD12A00ADA3E3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2B10DC012A3AD74800ADA3E3 /* CustomActivitiesListView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2B10DBFD2A3AD12D00ADA3E3 /* New Group1 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group1";
+			sourceTree = "<group>";
+		};
+		2B10DBFE2A3AD12F00ADA3E3 /* New Group2 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group2";
+			sourceTree = "<group>";
+		};
 		2B595DDF2A37ACFB0034BD42 = {
 			isa = PBXGroup;
 			children = (
@@ -63,6 +89,9 @@
 		2B595DEA2A37ACFB0034BD42 /* TouristActivities */ = {
 			isa = PBXGroup;
 			children = (
+				2B10DBFE2A3AD12F00ADA3E3 /* New Group2 */,
+				2B10DBFD2A3AD12D00ADA3E3 /* New Group1 */,
+				2B10DBFC2A3AD12A00ADA3E3 /* Views */,
 				714D69032A3A8D400090C5A9 /* ActivityImage.swift */,
 				714D69072A3A9A350090C5A9 /* FavoritesView.swift */,
 				2B595DEB2A37ACFB0034BD42 /* TouristActivitiesApp.swift */,
@@ -73,6 +102,7 @@
 				2B6000422A37C56800D96C9A /* ActivityDetailsView.swift */,
 				2B595DEF2A37ACFC0034BD42 /* Assets.xcassets */,
 				2B595DF12A37ACFC0034BD42 /* Preview Content */,
+				2B10DBFF2A3AD18300ADA3E3 /* ActivitiesDataSource.swift */,
 			);
 			path = TouristActivities;
 			sourceTree = "<group>";
@@ -160,8 +190,10 @@
 				714D69002A3A875B0090C5A9 /* ActivityModel.swift in Sources */,
 				2B595DEC2A37ACFB0034BD42 /* TouristActivitiesApp.swift in Sources */,
 				714D69082A3A9A350090C5A9 /* FavoritesView.swift in Sources */,
+				2B10DC002A3AD18300ADA3E3 /* ActivitiesDataSource.swift in Sources */,
 				714D69042A3A8D400090C5A9 /* ActivityImage.swift in Sources */,
 				2B6000412A37C4AB00D96C9A /* ActivitiesView.swift in Sources */,
+				2B10DC022A3AD74800ADA3E3 /* CustomActivitiesListView.swift in Sources */,
 				2B6000432A37C56800D96C9A /* ActivityDetailsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -219,7 +251,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -273,7 +305,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -291,7 +323,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TouristActivities/Preview Content\"";
-				DEVELOPMENT_TEAM = 5FQPC374Q5;
+				DEVELOPMENT_TEAM = C2V78TKCP9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -320,7 +352,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"TouristActivities/Preview Content\"";
-				DEVELOPMENT_TEAM = 5FQPC374Q5;
+				DEVELOPMENT_TEAM = C2V78TKCP9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
