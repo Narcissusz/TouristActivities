@@ -16,7 +16,7 @@ struct TouristActivitiesApp: App {
         WindowGroup {
             if let userRemember = UserDefaults.standard.string(forKey: "USER_REMEMBER"){
                 if userRemember == "true"{
-                    let userID = UserDefaults.standard.string(forKey: "USER_ID_LOGIN")
+//                    let userID = UserDefaults.standard.string(forKey: "USER_ID_LOGIN")
                     MainListView()
                 }else{
                     LoginView().environmentObject(userDS)
